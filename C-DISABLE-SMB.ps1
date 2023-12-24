@@ -1,5 +1,5 @@
 #Connect EXO
-Connect-ExchangeOnline -ManagedIdentity -Organization yourorgname.onmicrosoft.com
+Connect-ExchangeOnline -ManagedIdentity -Organization yourorg.onmicrosoft.com
 
 #Connect to Microsoft Graph
 Connect-MgGraph -Identity
