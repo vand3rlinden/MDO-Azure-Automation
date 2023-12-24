@@ -83,4 +83,4 @@ If you intend to manage groups in Exchange Online (EXO) and Entra ID, for tasks 
 
 To manage groups, your automation Account needs:
 - The module ```Microsoft.Graph.Groups``` (see [step 2](https://github.com/vand3rlinden/AzureAutomation/blob/main/README.md#setting-up-an-automation-account-with-the-necessary-permissions)).
-- Extra graph permissions ```Group.ReadWrite.All``` and ```GroupMember.ReadWrite.All``` (see [step 4](https://github.com/vand3rlinden/AzureAutomation/blob/main/README.md#setting-up-an-automation-account-with-the-necessary-permissions))
+- Extra graph permissions ```Group.ReadWrite.All``` and ```GroupMember.ReadWrite.All``` (see [step 4](https://github.com/vand3rlinden/AzureAutomation?tab=readme-ov-file#setting-up-an-automation-account-with-the-necessary-permissions))
