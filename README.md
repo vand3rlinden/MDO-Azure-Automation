@@ -53,6 +53,8 @@ ForEach($scope in $graphScopes){
   New-MgServicePrincipalAppRoleAssignment -PrincipalId $managedIdentityId -ServicePrincipalId $managedIdentityId -ResourceId $graphApp.Id -AppRoleId $appRole.Id
 }
 ```
+> NOTE: The Graph permissions, specifically ```Group.ReadWrite.All``` and ```GroupMember.ReadWrite.All```, are optional and appear grayed out if you plan to expand the Automation account for additional use cases (see [Extra](https://github.com/vand3rlinden/AzureAutomation/blob/main/README.md#extra)).
+
 
 6. Directly assign the Entra ID role "Exchange Administrator" to your Automation Account.
 
