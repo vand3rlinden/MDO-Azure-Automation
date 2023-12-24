@@ -1,4 +1,4 @@
-# 
+# Automate processes in MDO, EOP and Entra ID.
 ## Setting up an Automation Account with the necessary permissions
 1. Establish a new Automation Account (System assigned)
    
