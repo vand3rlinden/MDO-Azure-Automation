@@ -58,33 +58,6 @@ ForEach($scope in $graphScopes){
 
 6. Directly assign the Entra ID role "Exchange Administrator" to your Automation Account.
 
-## Setting up the Automation Runbooks login Runbook for EXO and MgGraph.
-1. Navigate to your Automation Account, access Process Automation > Runbooks, and click on 'Create a runbook' with the specified settings.
-      - Name: Login-EXO
-      - Type: PowerShell
-      - Runtime: 7.2
-  
-2. In the PowerShell Runbook, replicate (except for the organization name, which should be modified to your organization's name) the following.
-```
-#Runbook to login as a system-assigned managed identity
-Connect-ExchangeOnline -ManagedIdentity -Organization yourorg.onmicrosoft.com
-```
-
-3. Click on ‘Publish’
-   
-4. After publishing, generate another runbook with the following configurations.
-      - Name: Login-MgGraph
-      - Type: PowerShell
-      - Runtime: 7.2
-  
-5. In the PowerShell Runbook, replicate the following:
-```
-#Runbook to login as a system-assigned managed identity
-Connect-MgGraph -Identity
-```
-
-6. Click on ‘Publish’
-
 ## C-DISABLE-SMB-SET-JOBTITLE.ps1
 This runbook enables you to disable Shared Mailbox identities in Entra ID. To configure this in your Automation account, follow the steps below.
 
@@ -111,5 +84,3 @@ If you intend to manage groups in Exchange Online (EXO) and Entra ID, for tasks 
 To manage groups, your automation Account needs:
 - The module ```Microsoft.Graph.Groups``` (see [step 2](https://github.com/vand3rlinden/AzureAutomation/blob/main/README.md#setting-up-an-automation-account-with-the-necessary-permissions)).
 - Extra graph permissions ```Group.ReadWrite.All``` and ```GroupMember.ReadWrite.All``` (see [step 4](https://github.com/vand3rlinden/AzureAutomation/blob/main/README.md#setting-up-an-automation-account-with-the-necessary-permissions))
-
-
