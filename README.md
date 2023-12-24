@@ -81,4 +81,23 @@ Connect-MgGraph -Identity
 
 6. Click on ‘Publish’
 
-##
+## C-DISABLE-SMB-SET-JOBTITLE.ps1
+This runbook enables you to disable Shared Mailbox identities in Entra ID. To configure this in your Automation account, follow the steps below.
+
+1. Create a new Runbook with the following configurations.
+      - Name: C-DISABLE-SMB-SET-JOBTITLE (C stands for tenant shorter)
+      - Type: PowerShell
+      - Runtime: 7.2
+
+2. You can utilize the runbook to disable all your Shared Mailboxes and assign them a JobTitle by clicking 'Start' in the runbook.
+
+3. Automate the runbook by assigning it a schedule. In your Automation Account, navigate to Shared Resources > Schedules and click 'Add a schedule'.
+
+4. Choose a preferred time, time zone, and set the recurrence to recurring.
+
+5. After creating the schedule, open a runbook and navigate to Resources > Schedules.
+
+6. Click on 'Add a schedule,' link a schedule to your runbook, and select the desired schedule.
+
+7. These steps should be repeated for each ```.ps1``` file in this repository.
+
