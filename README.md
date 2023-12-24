@@ -54,8 +54,7 @@ ForEach($scope in $graphScopes){
 
 6. Directly assign the Entra ID role "Exchange Administrator" to your Automation Account.
 
-## Setting up the Automation Runbooks in two steps
-### Step 1: Configure login runbooks to establish connections with Exchange Online and Microsoft Graph using a system-assigned managed identity.
+## Setting up the Automation Runbooks login Runbook for EXO and MgGraph.
 1. Navigate to your Automation Account, access Process Automation > Runbooks, and click on 'Create a runbook' with the specified settings.
       - Name: Login-EXO
       - Type: PowerShell
@@ -82,3 +81,4 @@ Connect-MgGraph -Identity
 
 6. Click on ‘Publish’
 
+##
