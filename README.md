@@ -43,9 +43,7 @@ ForEach($scope in $graphScopes){
 $managedIdentityId = (Get-MgServicePrincipal -Filter "displayName eq 'YOUR-AUTOMATION-ACCOUNT'").id
 $graphApp = Get-MgServicePrincipal -Filter "AppId eq '00000003-0000-0000-c000-000000000000'" #AppId of Microsoft Graph in all Enterprise Applications, always the same in each tenant.
 $graphScopes = @(
-    'User.ReadWrite.All',
-    #'Group.ReadWrite.All',
-    #'GroupMember.ReadWrite.All'
+    'User.ReadWrite.All'
 )
 
 ForEach($scope in $graphScopes){
@@ -53,8 +51,6 @@ ForEach($scope in $graphScopes){
   New-MgServicePrincipalAppRoleAssignment -PrincipalId $managedIdentityId -ServicePrincipalId $managedIdentityId -ResourceId $graphApp.Id -AppRoleId $appRole.Id
 }
 ```
-> NOTE: The Graph permissions, specifically ```Group.ReadWrite.All``` and ```GroupMember.ReadWrite.All```, are optional and appear grayed out if you plan to expand the Automation account for additional use cases (see [Extra](https://github.com/vand3rlinden/AzureAutomation?tab=readme-ov-file#extra)).
-
 
 6. Directly assign the Entra ID role "Exchange Administrator" to your Automation Account.
 
@@ -76,11 +72,4 @@ This runbook enables you to disable Shared Mailbox identities in Entra ID. To co
 
 6. Click on 'Add a schedule,' link a schedule to your runbook, and select the desired schedule.
 
-7. These steps should be repeated for each ```.ps1``` file in this repository.
-
-## Extra
-If you intend to manage groups in Exchange Online (EXO) and Entra ID, for tasks like creating a mail-enabled Entra ID security group (to populate an EXO DistributionGroup with members from an Entra ID security group using the ```Compare-Object``` cmdlet), you must grant additional permissions to your Automation account or scope it to a second Automation account.
-
-To manage groups, your automation Account needs:
-- The module ```Microsoft.Graph.Groups``` (see [step 2](https://github.com/vand3rlinden/AzureAutomation?tab=readme-ov-file#setting-up-an-automation-account-with-the-necessary-permissions)).
-- Extra graph permissions ```Group.ReadWrite.All``` and ```GroupMember.ReadWrite.All``` (see [step 4](https://github.com/vand3rlinden/AzureAutomation?tab=readme-ov-file#setting-up-an-automation-account-with-the-necessary-permissions))
+7. These steps can be repeated for ```C-ROTATE-DKIM-KEY.ps1``` in this repository.
