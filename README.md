@@ -73,11 +73,11 @@ This runbook enables you to disable Shared Mailbox identities in Entra ID. To co
 
 7. Click on 'Add a schedule,' link the schedule to your runbook, and select the desired schedule.
 
-## C-ROTATE-DKIM-KEY.ps1
+## C-ROTATE-DKIM-KEYS.ps1
 This runbook rotates the DKIM key(s) that are listed in the [Email authentication settings](https://security.microsoft.com/authentication?viewid=DKIM) in MDO. To configure this in your Automation account, follow the steps below.
 
 1. Create a new Runbook with the following configurations.
-      - Name: C-ROTATE-DKIM-KEY (C stands for tenant shorter)
+      - Name: C-ROTATE-DKIM-KEYS (C stands for tenant shorter)
       - Type: PowerShell
       - Runtime: 7.2
 
