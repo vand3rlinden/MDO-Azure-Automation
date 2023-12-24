@@ -1,8 +1,8 @@
 #Connect EXO
-. .\Login-EXO.ps1
+Connect-ExchangeOnline -ManagedIdentity -Organization yourorgname.onmicrosoft.com
 
 #Connect to Microsoft Graph
-. .\Login-MgGraph.ps1
+Connect-MgGraph -Identity
 
 #Get all shared mailboxes
 $SMBS = (Get-Mailbox -RecipientTypeDetails SharedMailbox -ResultSize Unlimited).UserPrincipalname
