@@ -101,3 +101,8 @@ This runbook enables you to disable Shared Mailbox identities in Entra ID. To co
 
 7. These steps should be repeated for each ```.ps1``` file in this repository.
 
+## Extra
+If you have a disere to manage groups in EXO and Entra ID, such as creating a mail enabled Entra ID security group (to fill a EXO DistributionGroup with members of an Entra ID security group with the ```Compare-Object````cmdlet), you need to give your Automation account extra permissions or scope to a second Automation account. 
+
+To manage groups, your automation Account needs to module (see step 2 in:
+- Microsoft.Graph.Groups
