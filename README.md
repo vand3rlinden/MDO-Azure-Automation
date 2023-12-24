@@ -54,11 +54,11 @@ ForEach($scope in $graphScopes){
 
 6. Directly assign the Entra ID role "Exchange Administrator" to your Automation Account.
 
-## C-DISABLE-SMB-SET-JOBTITLE.ps1
+## C-DISABLE-SMB.ps1
 This runbook enables you to disable Shared Mailbox identities in Entra ID. To configure this in your Automation account, follow the steps below.
 
 1. Create a new Runbook with the following configurations.
-      - Name: C-DISABLE-SMB-SET-JOBTITLE (C stands for tenant shorter)
+      - Name: C-DISABLE-SMB (C stands for tenant shorter)
       - Type: PowerShell
       - Runtime: 7.2
 
@@ -67,9 +67,28 @@ This runbook enables you to disable Shared Mailbox identities in Entra ID. To co
 3. Automate the runbook by assigning it a schedule. In your Automation Account, navigate to Shared Resources > Schedules and click 'Add a schedule'.
 
 4. Choose a preferred time, time zone, and set the recurrence to recurring.
+     - Example: Daily recurring on 3:00 AM
 
-5. After creating the schedule, open a runbook and navigate to Resources > Schedules.
+6. After creating the schedule, open the runbook and navigate to Resources > Schedules.
 
-6. Click on 'Add a schedule,' link a schedule to your runbook, and select the desired schedule.
+7. Click on 'Add a schedule,' link the schedule to your runbook, and select the desired schedule.
 
-7. These steps can be repeated for ```C-ROTATE-DKIM-KEY.ps1``` in this repository.
+## C-ROTATE-DKIM-KEY.ps1
+This runbook rotates the DKIM key(s) that are listed in the [Email authentication settings](https://security.microsoft.com/authentication?viewid=DKIM) in MDO. To configure this in your Automation account, follow the steps below.
+
+1. Create a new Runbook with the following configurations.
+      - Name: C-ROTATE-DKIM-KEY (C stands for tenant shorter)
+      - Type: PowerShell
+      - Runtime: 7.2
+
+2. You can use the runbook to rotate the DKIM key(s) by clicking 'Start' in the runbook.
+
+3. Automate the runbook by assigning it a schedule. In your Automation Account, navigate to Shared Resources > Schedules and click 'Add a schedule'.
+
+4. Choose a preferred time, time zone, and set the recurrence to recurring.
+     - Example: Recurring every 6 months
+
+6. After creating the schedule, open the runbook and navigate to Resources > Schedules.
+
+7. Click on 'Add a schedule,' link the schedule to your runbook, and select the desired schedule.
+
