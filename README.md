@@ -15,9 +15,9 @@ DKIM keys, acting as digital signatures for email integrity, need periodic rotat
 1. Establish a new Automation Account (System assigned)
    
 2. Navigate to Shared Resource > Modules > Add a module > Browse from gallery > add the list below > Runtime version 7.2
-    - ExchangeOnlineManagement
-    - Microsoft.Graph.Authentication
-    - Microsoft.Graph.Users
+    - ```ExchangeOnlineManagement```
+    - ```Microsoft.Graph.Authentication```
+    - ```Microsoft.Graph.Users```
     
 3. Launch PowerShell on your system and establish a connection with Microsoft Graph using the following scopes by executing.
 ```
@@ -43,7 +43,9 @@ ForEach($scope in $graphScopes){
 $managedIdentityId = (Get-MgServicePrincipal -Filter "displayName eq 'YOUR-AUTOMATION-ACCOUNT'").id
 $graphApp = Get-MgServicePrincipal -Filter "AppId eq '00000003-0000-0000-c000-000000000000'" #AppId of Microsoft Graph in all Enterprise Applications, always the same in each tenant.
 $graphScopes = @(
-    'User.ReadWrite.All'
+    'User.ReadWrite.All',
+    #'Group.ReadWrite.All',
+    #'GroupMember.ReadWrite.All'
 )
 
 ForEach($scope in $graphScopes){
@@ -102,7 +104,10 @@ This runbook enables you to disable Shared Mailbox identities in Entra ID. To co
 7. These steps should be repeated for each ```.ps1``` file in this repository.
 
 ## Extra
-If you have a disere to manage groups in EXO and Entra ID, such as creating a mail enabled Entra ID security group (to fill a EXO DistributionGroup with members of an Entra ID security group with the ```Compare-Object````cmdlet), you need to give your Automation account extra permissions or scope to a second Automation account. 
+If you intend to manage groups in Exchange Online (EXO) and Entra ID, for tasks like creating a mail-enabled Entra ID security group (to populate an EXO DistributionGroup with members from an Entra ID security group using the ```Compare-Object``` cmdlet), you must grant additional permissions to your Automation account or scope it to a second Automation account.
 
-To manage groups, your automation Account needs to module (see [step 2](https://github.com/vand3rlinden/AzureAutomation/blob/main/README.md#setting-up-an-automation-account-with-the-necessary-permissions))
-- Microsoft.Graph.Groups
+To manage groups, your automation Account needs:
+- The module ```Microsoft.Graph.Groups``` (see [step 2](https://github.com/vand3rlinden/AzureAutomation/blob/main/README.md#setting-up-an-automation-account-with-the-necessary-permissions)).
+- Extra graph permissions ```Group.ReadWrite.All``` and ```GroupMember.ReadWrite.All``` (see [step 4](https://github.com/vand3rlinden/AzureAutomation/blob/main/README.md#setting-up-an-automation-account-with-the-necessary-permissions))
+
+
