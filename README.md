@@ -10,7 +10,7 @@ If you let your IT administrators disable the Shared Mailbox identities they cre
 ### Automate DKIM Key Rotation with Azure Automation
 DKIM keys, acting as digital signatures for email integrity, need periodic rotation to minimize the risk of compromise. The recommended frequency, is every six months, with the rotation interval tied to the key length—shorter intervals for shorter key lengths. This practice helps defend against potential attacks targeting publicly published DKIM keys.
 
-[Importance of Automated DKIM Key Rotation on dmarcian](https://dmarcian.com/rotate-dkim-key/)
+- [Importance of Automated DKIM Key Rotation on dmarcian](https://dmarcian.com/rotate-dkim-key/)
 
 ## Setting up an Automation Account with the necessary permissions
 1. Establish a new Automation Account (System assigned)
