@@ -27,30 +27,18 @@ Connect-MgGraph -Scopes AppRoleAssignment.ReadWrite.All,Application.Read.All
 
 4. After establishing the connection, it's necessary to allocate Exchange Online application permissions to your automation account. Execute the following command.
 ```
-$managedIdentityId = (Get-MgServicePrincipal -Filter "displayName eq 'YOUR-AUTOMATION-ACCOUNT'").id
+$managedIdentityId = (Get-MgServicePrincipal -Filter "displayName eq 'YOUR-AUTOMATION-ACCOUNT'").Id
 $graphApp = Get-MgServicePrincipal -Filter "AppId eq '00000002-0000-0ff1-ce00-000000000000'" #AppId of Office 365 Exchange Online in all Enterprise Applications, always the same in each tenant.
-$graphScopes = @(
-    'Exchange.ManageAsApp'
-)
-
-ForEach($scope in $graphScopes){
-  $appRole = $graphApp.AppRoles | Where-Object {$_.Value -eq $scope}
-  New-MgServicePrincipalAppRoleAssignment -PrincipalId $managedIdentityId -ServicePrincipalId $managedIdentityId -ResourceId $graphApp.Id -AppRoleId $appRole.Id
-}
+$appRole = $graphApp.AppRoles | Where-Object {$_.Value -eq "Exchange.ManageAsApp"}
+New-MgServicePrincipalAppRoleAssignment -PrincipalId $managedIdentityId -ServicePrincipalId $managedIdentityId -ResourceId $graphApp.Id -AppRoleId $appRole.Id
 ```
 
 5. Once the Exchange Online permissions have been added, proceed to assign Microsoft Graph application permissions to your automation account by running.
 ```
 $managedIdentityId = (Get-MgServicePrincipal -Filter "displayName eq 'YOUR-AUTOMATION-ACCOUNT'").id
 $graphApp = Get-MgServicePrincipal -Filter "AppId eq '00000003-0000-0000-c000-000000000000'" #AppId of Microsoft Graph in all Enterprise Applications, always the same in each tenant.
-$graphScopes = @(
-    'User.ReadWrite.All'
-)
-
-ForEach($scope in $graphScopes){
-  $appRole = $graphApp.AppRoles | Where-Object {$_.Value -eq $scope}
-  New-MgServicePrincipalAppRoleAssignment -PrincipalId $managedIdentityId -ServicePrincipalId $managedIdentityId -ResourceId $graphApp.Id -AppRoleId $appRole.Id
-}
+$appRole = $graphApp.AppRoles | Where-Object {$_.Value -eq "User.ReadWrite.All"}
+New-MgServicePrincipalAppRoleAssignment -PrincipalId $managedIdentityId -ServicePrincipalId $managedIdentityId -ResourceId $graphApp.Id -AppRoleId $appRole.Id
 ```
 
 6. Directly assign the Entra ID role "Exchange Administrator" to your Automation Account.
