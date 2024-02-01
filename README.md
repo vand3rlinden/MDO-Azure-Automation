@@ -8,7 +8,7 @@ Disabling shared mailbox identities is recommended to prevent potential abuse by
 If you let your IT administrators disable the Shared Mailbox identities they created, it would be simple to forget. The key is to delegate this task to Azure Automation, using a system assigned managed identity.
 
 ### Automate DKIM Key Rotation with Azure Automation
-DKIM keys, acting as digital signatures for email integrity, need periodic rotation to minimize the risk of compromise. The recommended frequency, is every six months, with the rotation interval tied to the key length—shorter intervals for shorter key lengths. This practice helps defend against potential attacks targeting publicly published DKIM keys.
+DKIM keys, which act as digital signatures for email integrity, must be rotated periodically to minimize the risk of compromise. The recommended frequency is every six months, with the rotation interval tied to the key length - shorter intervals for shorter key lengths. This practice helps defend against potential attacks that target publicly released DKIM keys.
 
 - [Importance of Automated DKIM Key Rotation on dmarcian](https://dmarcian.com/rotate-dkim-key/)
 
