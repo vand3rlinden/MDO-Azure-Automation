@@ -1,4 +1,4 @@
-# Automate processes in MDO, EOP and Entra ID.
+# Automate processes in MDO/EOP and Entra ID.
 
 ### Disable Shared Mailbox identities with Azure Automation
 When you create a new shared mailbox in Exchange Online or with PowerShell, an identity in Entra ID is automatically created and, unfortunately, enabled by default. The identity in Entra ID of a shared mailbox is the same as a normal user, but a shared mailbox doesn't need to be enabled to work.
