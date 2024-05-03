@@ -75,7 +75,8 @@ This runbook rotates the DKIM key(s) that are listed in the [Email authenticatio
 3. Automate the runbook by assigning it a schedule. In your Automation Account, navigate to Shared Resources > Schedules and click 'Add a schedule'.
 
 4. Choose a preferred time, time zone, and set the recurrence to recurring.
-     - Example: Recurring every 6 months
+     - Recurring every 3 months - Rotating the DKIM keys every three months ensures a complete rotation of both selectors
+every 6 months.
 
 6. After creating the schedule, open the runbook and navigate to Resources > Schedules.
 
