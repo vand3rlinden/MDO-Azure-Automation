@@ -24,7 +24,7 @@ DKIM keys, which act as digital signatures for email integrity, must be rotated 
  -  Visit https://www.powershellgallery.com/packages/ExchangeOnlineManagement/3.5.0
  -  Choose Deploy to Azure Automation.
 
-   > The default ExchangeOnlineManagement module installed from the PowerShell Gallery in Azure Automation is version 3.7.0, which has a [known issue](https://learn.microsoft.com/en-us/answers/questions/1840897/connect-exchangeonline-in-azure-automation-account). When you downgrade to ExchangeOnlineManagement 3.5.0, the scripts will work again. Please note that version 3.5.0 will be deployed in PowerShell runtime 5.1, so you’ll also need to create runbooks using the same runtime version.
+   > The default ExchangeOnlineManagement module installed from the PowerShell Gallery in Azure Automation is version 3.7.0, which has a [known issue](https://learn.microsoft.com/en-us/answers/questions/1840897/connect-exchangeonline-in-azure-automation-account) since 3.5.1. When you downgrade to ExchangeOnlineManagement 3.5.0, the scripts will work again. Please note that version 3.5.0 will be deployed in PowerShell runtime 5.1, so you’ll also need to create runbooks using the same runtime version.
     
 4. Launch PowerShell on your system and establish a connection with Microsoft Graph using the following scopes by executing.
 ```
