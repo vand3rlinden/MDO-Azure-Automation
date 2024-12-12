@@ -16,17 +16,22 @@ DKIM keys, which act as digital signatures for email integrity, must be rotated 
 ## Setting up an Automation Account with the necessary permissions
 1. Establish a new Automation Account (System assigned)
    
-2. Navigate to Shared Resource > Modules > Add a module > Browse from gallery > add the list below > Runtime version 7.2
-    - ```ExchangeOnlineManagement```
+2. Navigate to Shared Resource > Modules > Add a module > Browse from gallery > add the list below > Runtime version 5.1
     - ```Microsoft.Graph.Authentication```
     - ```Microsoft.Graph.Users```
+  
+3. Install ExchangeOnlineManagement 3.5.0
+ -  Visit https://www.powershellgallery.com/packages/ExchangeOnlineManagement/3.5.0
+ -  Choose Deploy to Azure Automation.
+
+   > The default ExchangeOnlineManagement module installed from the PowerShell Gallery in Azure Automation is version 3.7.0, which has a [known issue](https://learn.microsoft.com/en-us/answers/questions/1840897/connect-exchangeonline-in-azure-automation-account). When you downgrade to ExchangeOnlineManagement 3.5.0, the scripts will work again. Please note that version 3.5.0 will be deployed in PowerShell runtime 5.1, so you’ll also need to create runbooks using the same runtime version.
     
-3. Launch PowerShell on your system and establish a connection with Microsoft Graph using the following scopes by executing.
+4. Launch PowerShell on your system and establish a connection with Microsoft Graph using the following scopes by executing.
 ```
 Connect-MgGraph -Scopes AppRoleAssignment.ReadWrite.All,Application.Read.All
 ```
 
-4. After establishing the connection, it's necessary to allocate Exchange Online application permissions to your automation account. Execute the following command.
+5. After establishing the connection, it's necessary to allocate Exchange Online application permissions to your automation account. Execute the following command.
 ```
 $managedIdentityId = (Get-MgServicePrincipal -Filter "displayName eq 'YOUR-AUTOMATION-ACCOUNT'").Id
 $graphApp = Get-MgServicePrincipal -Filter "AppId eq '00000002-0000-0ff1-ce00-000000000000'" #AppId of Office 365 Exchange Online in all Enterprise Applications, always the same in each tenant.
@@ -34,7 +39,7 @@ $appRole = $graphApp.AppRoles | Where-Object {$_.Value -eq "Exchange.ManageAsApp
 New-MgServicePrincipalAppRoleAssignment -PrincipalId $managedIdentityId -ServicePrincipalId $managedIdentityId -ResourceId $graphApp.Id -AppRoleId $appRole.Id
 ```
 
-5. Once the Exchange Online permissions have been added, proceed to assign Microsoft Graph application permissions to your automation account by running.
+6. Once the Exchange Online permissions have been added, proceed to assign Microsoft Graph application permissions to your automation account by running.
 ```
 $managedIdentityId = (Get-MgServicePrincipal -Filter "displayName eq 'YOUR-AUTOMATION-ACCOUNT'").id
 $graphApp = Get-MgServicePrincipal -Filter "AppId eq '00000003-0000-0000-c000-000000000000'" #AppId of Microsoft Graph in all Enterprise Applications, always the same in each tenant.
@@ -42,7 +47,7 @@ $appRole = $graphApp.AppRoles | Where-Object {$_.Value -eq "User.ReadWrite.All"}
 New-MgServicePrincipalAppRoleAssignment -PrincipalId $managedIdentityId -ServicePrincipalId $managedIdentityId -ResourceId $graphApp.Id -AppRoleId $appRole.Id
 ```
 
-6. Directly assign the Entra ID role "Exchange Administrator" to your Automation Account.
+7. Directly assign the Entra ID role "Exchange Administrator" to your Automation Account.
 
 ## C-DISABLE-SMB.ps1
 This runbook enables you to disable Shared Mailbox identities in Entra ID. To configure this in your Automation account, follow the steps below.
@@ -50,7 +55,7 @@ This runbook enables you to disable Shared Mailbox identities in Entra ID. To co
 1. Create a new Runbook with the following configurations.
       - Name: C-DISABLE-SMB (C stands for tenant shorter)
       - Type: PowerShell
-      - Runtime: 7.2
+      - Runtime: 5.1
 
 2. You can utilize the runbook to disable all your Shared Mailboxes and assign them a JobTitle by clicking 'Start' in the runbook.
 
