@@ -47,7 +47,7 @@ $appRole = $graphApp.AppRoles | Where-Object {$_.Value -eq "User.ReadWrite.All"}
 New-MgServicePrincipalAppRoleAssignment -PrincipalId $managedIdentityId -ServicePrincipalId $managedIdentityId -ResourceId $graphApp.Id -AppRoleId $appRole.Id
 ```
 
-7. Directly assign the Entra ID role "Exchange Administrator" to your Automation Account.
+7. Directly assign the Entra ID role ***Exchange Administrator*** to your Automation Account.
 
 ## C-DISABLE-SMB.ps1
 This runbook enables you to disable Shared Mailbox identities in Entra ID. To configure this in your Automation account, follow the steps below.
