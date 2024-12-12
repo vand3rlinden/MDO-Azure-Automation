@@ -1,3 +1,7 @@
+# Import Modules - Required due to PowerShell runtime version 5.1 of the run book
+Import-Module Microsoft.Graph.Authentication
+Import-Module Microsoft.Graph.Users
+
 #Connect EXO
 Connect-ExchangeOnline -ManagedIdentity -Organization yourorg.onmicrosoft.com
 
