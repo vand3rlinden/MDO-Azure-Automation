@@ -74,7 +74,7 @@ This runbook rotates the DKIM key(s) that are listed in the [Email authenticatio
 1. Create a new Runbook with the following configurations.
       - Name: C-ROTATE-DKIM-KEYS (C stands for tenant shorter)
       - Type: PowerShell
-      - Runtime: 7.2
+      - Runtime: 5.1
 
 2. You can use the runbook to rotate the DKIM key(s) by clicking 'Start' in the runbook.
 
