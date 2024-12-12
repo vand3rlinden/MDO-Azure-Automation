@@ -20,7 +20,7 @@ DKIM keys, which act as digital signatures for email integrity, must be rotated 
     - ```Microsoft.Graph.Authentication```
     - ```Microsoft.Graph.Users```
   
-3. Install ExchangeOnlineManagement 3.5.0
+3. Install the ExchangeOnlineManagement 3.5.0 module
  -  Visit https://www.powershellgallery.com/packages/ExchangeOnlineManagement/3.5.0
  -  Choose Deploy to Azure Automation.
 
