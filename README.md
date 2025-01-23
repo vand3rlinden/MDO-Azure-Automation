@@ -46,7 +46,7 @@ $graphApp = Get-MgServicePrincipal -Filter "AppId eq '00000003-0000-0000-c000-00
 $appRole = $graphApp.AppRoles | Where-Object {$_.Value -eq "User.ReadWrite.All"}
 New-MgServicePrincipalAppRoleAssignment -PrincipalId $managedIdentityId -ServicePrincipalId $managedIdentityId -ResourceId $graphApp.Id -AppRoleId $appRole.Id
 ```
-> **CAUTION**: Step 6 is only required if you want to force the Disable Shared Mailbox runbook.
+> **CAUTION**: Step 6 is only required if you want to implement the Disable Shared Mailbox runbook.
 
 7. Directly assign the Entra ID role ***Exchange Administrator*** to your Automation Account.
 
