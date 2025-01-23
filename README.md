@@ -22,7 +22,7 @@ DKIM keys, which act as digital signatures for email integrity, must be rotated 
   
 3. Install the ExchangeOnlineManagement 3.5.0 module
  -  Visit https://www.powershellgallery.com/packages/ExchangeOnlineManagement/3.5.0
- -  Choose Deploy to Azure Automation.
+ -  Choose Deploy to Azure Automation
 
    > The default ExchangeOnlineManagement module installed from the PowerShell Gallery in Azure Automation is version 3.7.0, which has a [known issue](https://learn.microsoft.com/en-us/answers/questions/1840897/connect-exchangeonline-in-azure-automation-account) since 3.5.1. When you downgrade to ExchangeOnlineManagement 3.5.0, the scripts will work again. Please note that version 3.5.0 will be deployed in PowerShell runtime 5.1, so you’ll also need to create runbooks using the same runtime version.
     
@@ -46,6 +46,7 @@ $graphApp = Get-MgServicePrincipal -Filter "AppId eq '00000003-0000-0000-c000-00
 $appRole = $graphApp.AppRoles | Where-Object {$_.Value -eq "User.ReadWrite.All"}
 New-MgServicePrincipalAppRoleAssignment -PrincipalId $managedIdentityId -ServicePrincipalId $managedIdentityId -ResourceId $graphApp.Id -AppRoleId $appRole.Id
 ```
+> **CAUTION**: Step 6 is only required if you want to force the Disable Shared Mailbox runbook.
 
 7. Directly assign the Entra ID role ***Exchange Administrator*** to your Automation Account.
 
