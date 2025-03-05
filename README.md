@@ -14,7 +14,7 @@ DKIM keys, which act as digital signatures for email integrity, must be rotated 
 - [Rotate DKIM keys on Microsoft Learn](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-dkim-configure#rotate-dkim-keys)
 
 ## Setting up an Automation Account with the necessary permissions
-1. Establish a new Automation Account (System assigned)
+1. Establish a new Automation Account (System assigned - Managed Identity)
    
 2. Navigate to Shared Resource > Modules > Add a module > Browse from gallery > add the list below > Runtime version 5.1
     - `Microsoft.Graph.Authentication`
