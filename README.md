@@ -14,9 +14,9 @@ DKIM keys, which act as digital signatures for email integrity, must be rotated 
 - [Rotate DKIM keys on Microsoft Learn](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-dkim-configure#rotate-dkim-keys)
 
 ## Setting up an Automation Account with the necessary permissions
-1. Establish a new Automation Account (System assigned - Managed Identity)
+1. Establish a new Automation Account **(System assigned - Managed Identity)**
    
-2. Navigate to Shared Resource > Modules > Add a module > Browse from gallery > add the list below > Runtime version 5.1
+2. Navigate to: **Shared Resource** > **Modules** > **Add a module** > **Browse from gallery** > **Add the list below** > **Runtime version 5.1**
     - `Microsoft.Graph.Authentication`
     - `Microsoft.Graph.Users`
   
@@ -26,12 +26,12 @@ DKIM keys, which act as digital signatures for email integrity, must be rotated 
 
    > The default ExchangeOnlineManagement module installed from the PowerShell Gallery in Azure Automation is version 3.7.0, which has a [known issue](https://learn.microsoft.com/en-us/answers/questions/1840897/connect-exchangeonline-in-azure-automation-account) since 3.5.1. When you downgrade to ExchangeOnlineManagement 3.5.0, the scripts will work again. Please note that version 3.5.0 will be deployed in PowerShell runtime 5.1, so you’ll also need to create runbooks using the same runtime version.
     
-4. Launch PowerShell on your system and establish a connection with Microsoft Graph using the following scopes by executing.
+4. Launch PowerShell on your system and establish a connection with Microsoft Graph using the following scopes by executing:
 ```
 Connect-MgGraph -Scopes AppRoleAssignment.ReadWrite.All,Application.Read.All
 ```
 
-5. After establishing the connection, it's necessary to allocate Exchange Online application permissions to your automation account. Execute the following command.
+5. After establishing the connection, it's necessary to allocate Exchange Online application permissions to your automation account. Execute the following command:
 ```
 $managedIdentityId = (Get-MgServicePrincipal -Filter "displayName eq 'YOUR-AUTOMATION-ACCOUNT'").Id
 $graphApp = Get-MgServicePrincipal -Filter "AppId eq '00000002-0000-0ff1-ce00-000000000000'" #AppId of Office 365 Exchange Online in all Enterprise Applications, always the same in each tenant.
@@ -39,22 +39,22 @@ $appRole = $graphApp.AppRoles | Where-Object {$_.Value -eq "Exchange.ManageAsApp
 New-MgServicePrincipalAppRoleAssignment -PrincipalId $managedIdentityId -ServicePrincipalId $managedIdentityId -ResourceId $graphApp.Id -AppRoleId $appRole.Id
 ```
 
-6. Once the Exchange Online permissions have been added, proceed to assign Microsoft Graph application permissions to your automation account by running.
+6. Once the Exchange Online permissions have been added, proceed to assign Microsoft Graph application permissions to your automation account by running:
+> **CAUTION**: Step 6 is only required if you want to implement the Disable Shared Mailbox runbook.
 ```
 $managedIdentityId = (Get-MgServicePrincipal -Filter "displayName eq 'YOUR-AUTOMATION-ACCOUNT'").id
 $graphApp = Get-MgServicePrincipal -Filter "AppId eq '00000003-0000-0000-c000-000000000000'" #AppId of Microsoft Graph in all Enterprise Applications, always the same in each tenant.
 $appRole = $graphApp.AppRoles | Where-Object {$_.Value -eq "User.ReadWrite.All"}
 New-MgServicePrincipalAppRoleAssignment -PrincipalId $managedIdentityId -ServicePrincipalId $managedIdentityId -ResourceId $graphApp.Id -AppRoleId $appRole.Id
 ```
-> **CAUTION**: Step 6 is only required if you want to implement the Disable Shared Mailbox runbook.
 
 7. Directly assign the Entra ID role ***Exchange Administrator*** to your Automation Account.
 
-## C-DISABLE-SMB.ps1
+## T-DISABLE-SMB.ps1
 This runbook enables you to disable Shared Mailbox identities in Entra ID. To configure this in your Automation account, follow the steps below.
 
 1. Create a new Runbook with the following configurations.
-      - Name: C-DISABLE-SMB (C stands for tenant shorter)
+      - Name: T-DISABLE-SMB (T stands for tenant shorter)
       - Type: PowerShell
       - Runtime: 5.1
 
@@ -69,11 +69,11 @@ This runbook enables you to disable Shared Mailbox identities in Entra ID. To co
 
 7. Click on 'Add a schedule,' link the schedule to your runbook, and select the desired schedule.
 
-## C-ROTATE-DKIM-KEYS.ps1
+## T-ROTATE-DKIM-KEYS.ps1
 This runbook rotates the DKIM key(s) that are listed in the [Email authentication settings](https://security.microsoft.com/authentication?viewid=DKIM) in MDO. To configure this in your Automation account, follow the steps below.
 
 1. Create a new Runbook with the following configurations.
-      - Name: C-ROTATE-DKIM-KEYS (C stands for tenant shorter)
+      - Name: T-ROTATE-DKIM-KEYS (T stands for tenant shorter)
       - Type: PowerShell
       - Runtime: 5.1
 
